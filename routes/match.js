@@ -1,9 +1,9 @@
+var express = require('express');
+var router = express.Router();
 
-/*
- * GET match API.
- */
+/* GET users listing. */
+router.get('/', function(req, res, next) {
+    res.send('respond in match');
+});
 
-exports.match = function(req, res){
-    res.send('matching');
-};
-
+module.exports = router;
