@@ -1,5 +1,5 @@
 var OSRM = require("../node_modules/osrm/lib/index");
-var osrm = new OSRM("./data/portugal-latest.osrm");
+var osrm = new OSRM("../data/portugal-latest.osrm");
 
 
 

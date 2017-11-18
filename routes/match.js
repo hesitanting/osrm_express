@@ -9,9 +9,9 @@ router.get('/', function(req, res, next) {
 
 router.post('/',function (req,res,next) {
 
-    options={};
-    options['coordinates'] = JSON.parse(req.param('coordinates'));
-    options['timestamps'] = JSON.parse(req.param('timestamps'));
+    options= req.query;
+    options['coordinates'] = JSON.parse(options['coordinates']);
+    options['timestamps'] = JSON.parse(options['timestamps']);
 
     match.matching(options,function (match_err,match_res) {
         result = {
