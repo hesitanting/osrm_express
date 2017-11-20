@@ -10,8 +10,13 @@ router.get('/', function(req, res, next) {
 router.post('/',function (req,res,next) {
 
     options= req.query;
-    options['coordinates'] = JSON.parse(options['coordinates']);
-    options['timestamps'] = JSON.parse(options['timestamps']);
+    for (let param in options) {
+        try {
+            options[param] = JSON.parse(options[param])
+        } catch (e) {
+            continue;
+        }
+    }
 
     match.matching(options,function (match_err,match_res) {
         result = {
