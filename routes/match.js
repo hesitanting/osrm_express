@@ -25,7 +25,7 @@ router.post('/', function (req, res, next) {
 
             } catch (err) {
                 res_content = {
-                    err: 'json parsing error: unknown post data'
+                    err: err.message
                 };
                 res.send(res_content)
             }
@@ -37,7 +37,7 @@ function on_matching(res, options) {
     for (let param in options) {
         try {
             options[param] = JSON.parse(options[param]);
-        } catch (e) {
+        } catch (err) {
         }
     }
     try {
@@ -50,7 +50,7 @@ function on_matching(res, options) {
         })
     } catch (err) {
         res_content = {
-            err: err
+            err: err.message
         };
         res.send(res_content);
     }
