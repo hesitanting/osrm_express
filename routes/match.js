@@ -9,9 +9,9 @@ router.get('/', function (req, res, next) {
 });
 
 router.post('/', function (req, res, next) {
-    options = undefined;
     if (req.body.coordinates) {
-        options = req.body
+        options = req.body;
+        on_matching(res,options);
     } else {
         let body = '', jsonStr;
         req.on('data', function (chunk) {
@@ -21,7 +21,7 @@ router.post('/', function (req, res, next) {
             try {
                 jsonStr = JSON.parse(body);
                 options = jsonStr;
-                on_matching(res, options)
+                on_matching(res, options);
 
             } catch (err) {
                 res_content = {
