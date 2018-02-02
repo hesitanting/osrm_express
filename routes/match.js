@@ -13,15 +13,18 @@ router.all('*', function (req, res, next) {
 });
 
 /* GET users listing. */
-router.get('/', function (req, res, next) {
+router.get('/:profile', function (req, res, next) {
     options = req.query;
-    on_matching(res, options);
+    profile = req.params.profile;
+    on_matching(profile, res, options);
 });
 
-router.post('/', function (req, res, next) {
+router.post('/:profile', function (req, res, next) {
+    profile = req.params.profile;
+
     if (req.body.coordinates) {
         options = req.body;
-        on_matching(res,options);
+        on_matching(profile, res, options);
     } else {
         let body = '', jsonStr;
         req.on('data', function (chunk) {
@@ -31,7 +34,7 @@ router.post('/', function (req, res, next) {
             try {
                 jsonStr = JSON.parse(body);
                 options = jsonStr;
-                on_matching(res, options);
+                on_matching(profile,res, options);
 
             } catch (err) {
                 res_content = {
@@ -43,7 +46,7 @@ router.post('/', function (req, res, next) {
     }
 });
 
-function on_matching(res, options) {
+function on_matching(profile,res, options) {
     for (let param in options) {
         try {
             options[param] = JSON.parse(options[param]);
@@ -51,7 +54,7 @@ function on_matching(res, options) {
         }
     }
     try {
-        match.matching(options, function (match_err, match_res) {
+        match.matching(profile,options, function (match_err, match_res) {
             result = {
                 err: match_err,
                 data: match_res

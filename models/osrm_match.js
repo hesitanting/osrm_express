@@ -1,17 +1,33 @@
 var OSRM = require("../node_modules/osrm/lib/index");
-var osrm = new OSRM("../data/portugal-latest.osrm");
+var osrm_car = new OSRM("../data/car_lua/portugal-latest.osrm");
+var osrm_bicycle = new OSRM("../data/bicycle_lua/portugal-bicycle.osrm");
 
 
+function matching(profile, options, callback) {
+    var osrm_model;
+    switch (profile) {
+        case 'car': {
+            osrm_model = osrm_car;
+            break;
+        }
+        case 'bicycle': {
+            osrm_model = osrm_bicycle;
+            break;
+        }
+        default: {
+            osrm_model = osrm_car;
+        }
+    }
 
-function matching(options,callback) {
-    osrm.match(options, function(err, response) {
+    osrm_model.match(options, function (err, response) {
         // if (err) throw err;
-        callback(err,response);
+        callback(err, response);
         // console.log(response.tracepoints); // array of Waypoint objects
         // console.log(response.matchings); // array of Route objects
     });
 }
 
+
 module.exports = {
-	matching:matching
+    matching: matching
 };
