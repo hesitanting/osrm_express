@@ -1,6 +1,6 @@
 var OSRM = require("../node_modules/osrm/lib/index");
 var osrm_car = new OSRM("../data/car_lua/portugal-latest.osrm");
-var osrm_bicycle = new OSRM("../data/bicycle_lua/portugal-bicycle.osrm");
+var osrm_test = new OSRM("../data/test_lua/portugal-test.osrm");
 
 
 function matching(profile, options, callback) {
@@ -10,8 +10,8 @@ function matching(profile, options, callback) {
             osrm_model = osrm_car;
             break;
         }
-        case 'bicycle': {
-            osrm_model = osrm_bicycle;
+        case 'test': {
+            osrm_model = osrm_test;
             break;
         }
         default: {
