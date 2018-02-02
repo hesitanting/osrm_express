@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "set NODE_ENV='production' && nodemon --max-old-space-size=2048 ./bin/www"
   },
   "dependencies": {
     "osrm": "^5.13.0",
